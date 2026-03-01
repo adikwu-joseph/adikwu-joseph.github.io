@@ -15,8 +15,20 @@
     html { scroll-behavior: smooth; }
     body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-weight: 300; line-height: 1.7; overflow-x: hidden; }
 
+    /* ── SCROLL PROGRESS BAR ── */
+    #progress-bar {
+      position: fixed;
+      top: 0; left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2), var(--gold));
+      width: 0%;
+      z-index: 999;
+      transition: width 0.15s ease-out;
+      box-shadow: 0 0 8px rgba(59,130,246,0.6);
+    }
+
     nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      position: fixed; top: 3px; left: 0; right: 0; z-index: 100;
       display: flex; justify-content: space-between; align-items: center;
       padding: 1.2rem 4rem;
       background: rgba(10,14,26,0.85); backdrop-filter: blur(12px);
@@ -54,7 +66,7 @@
     .stat-num { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; color: var(--accent2); }
     .stat-label { font-size: 0.85rem; color: var(--muted); margin-top: 0.2rem; }
 
-    #experience { background: var(--surface2); padding: 3rem 4rem; position: relative; z-index: 1; }
+    #experience { background: linear-gradient(135deg, #0d1f3c 0%, #0f2040 100%); padding: 3rem 4rem; position: relative; z-index: 1; }
     .exp-label { font-size: 0.8rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem; }
     .exp-grid { display: flex; gap: 1rem; flex-wrap: wrap; }
     .exp-item { background: var(--bg); border: 1px solid var(--border); border-radius: 0.75rem; padding: 1rem 1.5rem; display: flex; align-items: center; gap: 1rem; transition: border-color 0.2s; flex: 1; min-width: 200px; }
@@ -67,7 +79,7 @@
     .section-label { font-size: 0.8rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; }
     h2 { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(2rem, 4vw, 3rem); letter-spacing: -0.02em; margin-bottom: 3rem; }
 
-    #skills { background: var(--surface); }
+    #skills { background: linear-gradient(160deg, #0a1628 0%, #0d1e38 100%); }
     .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
     .skill-card { background: var(--bg); border: 1px solid var(--border); border-radius: 1rem; padding: 1.75rem; transition: all 0.3s; }
     .skill-card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 12px 32px rgba(59,130,246,0.1); }
@@ -94,7 +106,7 @@
     .project-link { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--accent2); text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: gap 0.2s; margin-top: auto; }
     .project-link:hover { gap: 0.7rem; }
 
-    #about { background: var(--surface); }
+    #about { background: linear-gradient(160deg, #0c1a30 0%, #0a1525 100%); }
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
     .about-text p { color: var(--muted); margin-bottom: 1rem; font-size: 0.95rem; }
     .about-text p strong { color: var(--text); font-weight: 500; }
@@ -127,6 +139,8 @@
 </head>
 <body>
 
+  <div id="progress-bar"></div>
+
   <nav>
     <div class="nav-logo">AJO</div>
     <ul class="nav-links">
@@ -141,7 +155,7 @@
     <div class="hero-glow"></div>
     <div class="hero-glow-2"></div>
     <div class="hero-content">
-      <div class="hero-tag">Open to opportunities · Luton, UK</div>
+      <div class="hero-tag">Open to opportunities · Remote & Hybrid · UK</div>
       <h1>Adikwu<br /><span>Joseph.</span></h1>
       <p class="hero-sub">
         <strong>Software Engineer | FinTech & Risk Systems.</strong><br />
@@ -229,10 +243,10 @@
     <h2>About Me</h2>
     <div class="about-grid">
       <div class="about-text">
-        <p>I'm a <strong>Python-focused Software Engineer</strong> with a rare combination of technical education and real-world FinTech domain expertise. I don't just build apps — I understand the compliance, risk, and fraud systems that underpin them.</p>
+        <p>I'm a <strong>Software Engineer specialising in FinTech & Risk Systems</strong>, with a rare combination of technical education and real-world domain expertise. I don't just build apps — I understand the compliance, risk, and fraud systems that underpin them.</p>
         <p>After earning a <strong>First Class BSc in Software Engineering</strong> from the University of Bedfordshire, I've been working as a Fraud Investigator at <strong>Monzo</strong>, applying data analysis, SQL querying, and OSINT techniques daily while building software on the side.</p>
         <p>I'm currently completing a <strong>Python Masters Programme at Edureka</strong> covering Data Science, AI, Django, PySpark, and more — and I've contributed to <strong>RLHF AI training pipelines at Outlier</strong>, evaluating Python code and mathematical problems to improve LLM outputs.</p>
-        <p>Based in <strong>Luton, UK</strong>. Targeting Python developer, FinTech engineer, and risk-tech roles. Open to remote and hybrid.</p>
+        <p>Based in <strong>Luton, UK</strong>. Targeting Software Engineer, FinTech, and risk-tech roles. Open to remote and hybrid.</p>
       </div>
       <div class="about-highlights">
         <div class="highlight-item reveal"><div class="highlight-icon">🎓</div><div class="highlight-text"><strong>BSc Software Engineering — First Class</strong>University of Bedfordshire, 2023</div></div>
@@ -262,6 +276,7 @@
     }, { threshold: 0.1 });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
+    // CV button fades into navbar once hero scrolls out
     const navCvBtn = document.querySelector('.nav-cv-btn');
     const heroObserver = new IntersectionObserver((entries) => {
       entries.forEach(e => {
@@ -270,6 +285,24 @@
       });
     }, { threshold: 0.2 });
     heroObserver.observe(document.querySelector('#hero'));
+
+    // Scroll progress bar
+    const progressBar = document.getElementById('progress-bar');
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = (scrollTop / docHeight) * 100;
+      progressBar.style.width = progress + '%';
+    });
+
+    // Subtle parallax on hero glows
+    const glow1 = document.querySelector('.hero-glow');
+    const glow2 = document.querySelector('.hero-glow-2');
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      if (glow1) glow1.style.transform = `translateY(${y * 0.15}px)`;
+      if (glow2) glow2.style.transform = `translateY(${y * 0.08}px)`;
+    }, { passive: true });
   </script>
 </body>
 </html>
