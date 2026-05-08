@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Adikwu Joseph Ochigbo — Software Engineer | FinTech & Risk Systems</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@300;400;600;700;800&family=DM+Sans:wght@200;300;400;500&display=swap" rel="stylesheet" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
@@ -417,7 +418,7 @@
 
   <!-- NAV -->
   <nav>
-    <div class="nav-logo">AJO</div>
+    <a href="#hero" style="text-decoration:none;"><div class="nav-logo">AJO</div></a>
     <ul class="nav-links">
       <li><a href="#skills">Skills</a></li>
       <li><a href="#projects">Projects</a></li>
@@ -435,7 +436,7 @@
       <span class="line"><span class="word accent">AO.</span></span>
     </h1>
     <p class="hero-sub">
-      <strong>First Class BSc Software Engineering.</strong> Building things that work — from event-driven servers to secure financial applications.
+      <strong>First Class BSc Software Engineering.</strong>
     </p>
     <div class="hero-actions">
       <a href="AJO_CV.pdf" target="_blank" class="btn-pill btn-fill">↓ View CV</a>
@@ -613,7 +614,7 @@
       <div class="about-text">
         <p>Software engineer with a <strong>First Class BSc Software Engineering</strong>. Two years fraud investigation at Monzo — analytical, evidence-driven thinking applied to engineering.</p>
         <p>Currently building: <strong>event-driven servers, custom data structures, OS-level tooling on Linux</strong>. Also completing a Python Masters Programme at Edureka and have contributed to RLHF AI training pipelines at Outlier.</p>
-        <p>Open to graduate and junior roles in <strong>Cambridge, London, and remote/hybrid UK</strong>.</p>
+        <p>Open to roles across the UK. Remote and hybrid welcome.</p>
       </div>
       <div class="highlights">
         <div class="highlight"><div class="h-icon">🎓</div><div class="h-text"><strong>BSc Software Engineering — First Class</strong>University of Bedfordshire, 2023</div></div>
@@ -630,11 +631,14 @@
   <!-- CTA -->
   <section id="cta">
     <h2 class="cta-title">Let's work<br/>together.</h2>
-    <p class="cta-sub">Open to graduate and junior Software Engineer roles in Cambridge, London, and remote/hybrid UK.</p>
+    <p class="cta-sub">Open to roles across the UK. Remote and hybrid welcome.</p>
     <div class="cta-action">
       <a href="mailto:Joegbo247@gmail.com" class="btn-pill btn-fill" style="font-size:1rem; padding:0.85rem 2.2rem;">Get in touch</a>
     </div>
   </section>
+
+  <!-- BACK TO TOP -->
+  <button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" style="position:fixed;bottom:2rem;right:2rem;width:44px;height:44px;background:var(--dark);color:white;border:none;border-radius:50%;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,0.15);opacity:0;pointer-events:none;transition:opacity 0.3s ease,transform 0.2s ease;z-index:500;">↑</button>
 
   <!-- FOOTER -->
   <footer>
@@ -668,10 +672,20 @@
       requestAnimationFrame(animRing);
     })();
 
-    // ── PROGRESS BAR ──
+    // ── PROGRESS BAR & BACK TO TOP ──
     const bar = document.getElementById('progress-bar');
+    const backToTop = document.getElementById('back-to-top');
     window.addEventListener('scroll', () => {
-      bar.style.width = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100) + '%';
+      const scrollY = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.width = (scrollY / docHeight * 100) + '%';
+      if (scrollY > 400) {
+        backToTop.style.opacity = '1';
+        backToTop.style.pointerEvents = 'auto';
+      } else {
+        backToTop.style.opacity = '0';
+        backToTop.style.pointerEvents = 'none';
+      }
     });
 
     // ── NAV CV BUTTON ──
