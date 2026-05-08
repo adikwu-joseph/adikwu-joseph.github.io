@@ -354,6 +354,7 @@
     /* ── ABOUT ── */
     #about { background: var(--off-white); padding: 7rem 3rem; }
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+    .about-text { min-width: 0; }
     .about-text p { color: var(--mid-gray); margin-bottom: 1.1rem; font-size: 0.92rem; line-height: 1.8; }
     .about-text p strong { color: var(--dark); font-weight: 500; }
     .about-text a { color: var(--blue); text-decoration: none; }
@@ -614,7 +615,6 @@
       <div class="about-text">
         <p>Software engineer with a <strong>First Class BSc Software Engineering</strong>. Two years fraud investigation at Monzo — analytical, evidence-driven thinking applied to engineering.</p>
         <p>Currently building: <strong>event-driven servers, custom data structures, OS-level tooling on Linux</strong>. Also completing a Python Masters Programme at Edureka and have contributed to RLHF AI training pipelines at Outlier.</p>
-        <p>Open to roles across the UK. Remote and hybrid welcome.</p>
       </div>
       <div class="highlights">
         <div class="highlight"><div class="h-icon">🎓</div><div class="h-text"><strong>BSc Software Engineering — First Class</strong>University of Bedfordshire, 2023</div></div>
@@ -623,7 +623,7 @@
         <div class="highlight"><div class="h-icon">🏦</div><div class="h-text"><strong>Fraud Investigator · Monzo</strong>Jan 2024–2026 · London (Remote)</div></div>
         <div class="highlight"><div class="h-icon">🤖</div><div class="h-text"><strong>AI Model Trainer · RLHF</strong>Outlier — Python & Maths evaluation</div></div>
         <div class="highlight"><div class="h-icon">🎮</div><div class="h-text"><strong>EA Sports Software Engineering Simulation</strong>Forage · March 2026 · C++, UML, Strategy Pattern</div></div>
-        <div class="highlight"><div class="h-icon">📍</div><div class="h-text"><strong>Luton, UK</strong>Open to remote & hybrid roles</div></div>
+        <div class="highlight"><div class="h-icon">📍</div><div class="h-text"><strong>Luton, UK</strong></div></div>
       </div>
     </div>
   </section>
@@ -638,7 +638,7 @@
   </section>
 
   <!-- BACK TO TOP -->
-  <button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" style="position:fixed;bottom:2rem;right:2rem;width:44px;height:44px;background:var(--dark);color:white;border:none;border-radius:50%;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,0.15);opacity:0;pointer-events:none;transition:opacity 0.3s ease,transform 0.2s ease;z-index:500;">↑</button>
+  <button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" style="position:fixed;bottom:2rem;right:2rem;width:44px;height:44px;background:var(--dark);color:white;border:1px solid transparent;border-radius:50%;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,0.15);opacity:0;pointer-events:none;transition:opacity 0.3s ease,transform 0.2s ease,background 0.3s ease,color 0.3s ease,border-color 0.3s ease;z-index:500;">↑</button>
 
   <!-- FOOTER -->
   <footer>
@@ -675,16 +675,42 @@
     // ── PROGRESS BAR & BACK TO TOP ──
     const bar = document.getElementById('progress-bar');
     const backToTop = document.getElementById('back-to-top');
+    const darkSections = ['#pinned', '#hscroll'];
+
     window.addEventListener('scroll', () => {
       const scrollY = window.scrollY;
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
       bar.style.width = (scrollY / docHeight * 100) + '%';
+
       if (scrollY > 400) {
         backToTop.style.opacity = '1';
         backToTop.style.pointerEvents = 'auto';
       } else {
         backToTop.style.opacity = '0';
         backToTop.style.pointerEvents = 'none';
+      }
+
+      // Switch colour on dark sections
+      let onDark = false;
+      darkSections.forEach(sel => {
+        const el = document.querySelector(sel);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top < window.innerHeight && rect.bottom > 0) onDark = true;
+        }
+      });
+      if (onDark) {
+        backToTop.style.background = 'white';
+        backToTop.style.color = '#1d1d1f';
+        backToTop.style.borderColor = 'rgba(255,255,255,0.2)';
+        cursor.style.background = 'white';
+        ring.style.borderColor = 'rgba(255,255,255,0.4)';
+      } else {
+        backToTop.style.background = '#1d1d1f';
+        backToTop.style.color = 'white';
+        backToTop.style.borderColor = 'transparent';
+        cursor.style.background = '#1d1d1f';
+        ring.style.borderColor = 'rgba(0,0,0,0.25)';
       }
     });
 
